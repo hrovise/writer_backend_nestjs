@@ -10,7 +10,7 @@ describe('TextService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [TextService,
        {
-    provide: getModelToken('UserModel'), 
+    provide: getModelToken('TextModel'), 
     useValue: {                         
       find: jest.fn(),
       create: jest.fn(),
