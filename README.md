@@ -12,5 +12,5 @@ project is written on NestJs framework
 - ### **adding Swagger** for documentation API
 
 ##🎯What will be done?
--### **AI integration** for translation(Another layer on Python)
--### **Comment** section for users
+- ### **AI integration** for translation(Another layer on Python)
+- ### **Comment** section for users
