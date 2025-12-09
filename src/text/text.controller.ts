@@ -49,7 +49,7 @@ export interface ITextResponse {
 export class TextController {
   constructor(
     private readonly textService: TextService,
-    private readonly configService: ConfigService,
+ 
     private readonly cloudinaryConfigService: CloudinaryConfigService
   ) { }
 

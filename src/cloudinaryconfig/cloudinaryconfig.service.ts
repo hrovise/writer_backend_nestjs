@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { MulterOptionsFactory, MulterModuleOptions } from '@nestjs/platform-express';
 import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
@@ -6,11 +7,11 @@ import * as streamifier from 'streamifier';
 @Injectable()
 export class CloudinaryConfigService  {
 
-  constructor(){
+  constructor( private readonly configService: ConfigService){
     cloudinary.config({
-       cloud_name: process.env.CLOUDY_NAME,
-      api_key: process.env.API_KEY_CLOUD,
-      api_secret: process.env.API_SECRET_CLOUD,
+       cloud_name: this.configService.getOrThrow<string>('CLOUDY_NAME'),
+      api_key: this.configService.getOrThrow<string>('API_KEY_CLOUD'),
+      api_secret: this.configService.getOrThrow<string>('API_SECRET_CLOUD'),
     });
   }
 
