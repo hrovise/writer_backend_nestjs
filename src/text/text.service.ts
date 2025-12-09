@@ -8,7 +8,7 @@ import { TextModel } from './schemas/text.schema';
 import type { ModelType } from '@typegoose/typegoose/lib/types';
 import { TextDto } from './dto/textDto';
 import { GetNovelDto } from './dto/novelDto';
-import { FilevalidatorService } from 'src/filevalidator/sharedservice/filevalidator/filevalidator.service';
+import { FileValidatorService } from 'src/filevalidator/sharedservice/filevalidator/filevalidator.service';
 import { UNKNOWN } from 'src/shared/constExpressions/expressions';
 import { Chunk } from './schemas/chunk.schema';
 import { ConfigService } from '@nestjs/config';
@@ -99,7 +99,7 @@ export class TextService {
 
   async checkFile(filePath: Buffer) {
    
-    const type = await FilevalidatorService.validateFile(filePath);
+    const type = await FileValidatorService.validateFile(filePath);
     if (type === UNKNOWN) {
       throw new BadRequestException('Неподдерживаемый тип файла');
     }

@@ -5,7 +5,7 @@ import { TextModule } from './text/text.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypegooseModule } from '@m8a/nestjs-typegoose';
 import { getMongoConfig } from './configs/mongo.config';
-import { FilevalidatorService } from './filevalidator/sharedservice/filevalidator/filevalidator.service';
+import { FileValidatorService } from './filevalidator/sharedservice/filevalidator/filevalidator.service';
 import { CloudinaryConfigService } from './cloudinaryconfig/cloudinaryconfig.service';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './auth/jwt.strategy';
@@ -34,6 +34,6 @@ import Joi from 'joi';
     UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService, FilevalidatorService, CloudinaryConfigService, JwtStrategy],
+  providers: [AppService, FileValidatorService, CloudinaryConfigService, JwtStrategy],
 })
 export class AppModule {}

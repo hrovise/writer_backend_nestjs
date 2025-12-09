@@ -5,7 +5,7 @@ import { DOCX, TXT, UNKNOWN } from 'src/shared/constExpressions/expressions';
 import { isText } from 'istextorbinary';
 
 @Injectable()
-export class FilevalidatorService {
+export class FileValidatorService {
   static async isTxt(buffer: Buffer): Promise<boolean | null> {
     return isText(null, buffer);
   }
