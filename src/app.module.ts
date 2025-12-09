@@ -14,7 +14,10 @@ import { UserModule } from './user/user.module';
 import Joi from 'joi';
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal:true,
+      envFilePath: '.env',
+    }),
  JwtModule.registerAsync({ 
   global: true,
       imports: [ConfigModule], 

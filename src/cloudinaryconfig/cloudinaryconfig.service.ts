@@ -14,7 +14,7 @@ export class CloudinaryConfigService  {
       api_secret: this.configService.getOrThrow<string>('API_SECRET_CLOUD'),
     });
   }
-
+ 
     async uploadImageBuffer(file: Express.Multer.File): Promise<string> {
     return new Promise((resolve, reject) => {
       
