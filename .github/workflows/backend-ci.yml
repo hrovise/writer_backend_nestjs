@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.PERSONAL_PAT }} 
+          token: ${{ secrets.PERSONAL_PAT_2 }} 
 
      
       - name: Set up Git
@@ -46,4 +46,4 @@ jobs:
 
       
       - name: Push prod
-        run: git push https://x-access-token:${{ secrets.PERSONAL_PAT }}@github.com/hrovise/writer_backend_nestjs.git prod
+        run: git push https://x-access-token:${{ secrets.PERSONAL_PAT_2 }}@github.com/hrovise/writer_backend_nestjs.git prod
