@@ -1,0 +1,14 @@
+export interface IChunk {
+  text: string;
+  length: number;
+  index: number;
+}
+
+export interface ITextResponse {
+  chunks: IChunk[];
+  totalLengthText: number;
+  chunksCount: number;
+  title: string;
+  genre: string;
+  srcImg:string;
+}

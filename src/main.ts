@@ -1,0 +1,41 @@
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { Connection } from 'mongoose';
+import { getConnectionToken } from '@m8a/nestjs-typegoose';
+import * as express from 'express';
+import { join } from 'path';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
+ 
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+  app.setGlobalPrefix('api');
+  const connection = app.get<Connection>(getConnectionToken());
+  app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
+  app.enableCors({
+    origin: configService.getOrThrow<string>('CLIENT_URL'),
+    credentials: true,
+  });
+  connection.once('open', () => {
+    console.log('MongoDB connected!');
+    console.log('port:', app.getHttpServer().address().port);
+  });
+  connection.on('error', (err) => {
+    console.error('MongoDB connection error:', err);
+  });
+
+  const config = new DocumentBuilder()
+    .setTitle('Project API')
+    .setDescription('Документация API для проекта')
+    .setVersion('1.0')
+    .addTag('angular', 'Примеры эндпоинтов')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
+  await app.listen(configService.getOrThrow<number>('PORT') ?? 3000);
+}
+bootstrap();
