@@ -1,20 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MulterOptionsFactory, MulterModuleOptions } from '@nestjs/platform-express';
 import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import * as streamifier from 'streamifier';
 @Injectable()
-export class CloudinaryConfigService  {
+export class CloudinaryConfigService implements OnModuleInit  {
 
   constructor( private readonly configService: ConfigService){
-     
-    cloudinary.config({
-       cloud_name: process.env.CLOUDY_NAME,
+       
+  }
+  onModuleInit() {
+  
+    
+   cloudinary.config({
+       cloud_name: this.configService.getOrThrow<string>('CLOUDY_NAME'),
       api_key: this.configService.getOrThrow<string>('API_KEY_CLOUD'),
       api_secret: this.configService.getOrThrow<string>('API_SECRET_CLOUD'),
     });
-
   }
  
     async uploadImageBuffer(file: Express.Multer.File): Promise<string> {
