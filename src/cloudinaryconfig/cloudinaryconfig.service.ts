@@ -5,20 +5,17 @@ import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import * as streamifier from 'streamifier';
 @Injectable()
-export class CloudinaryConfigService implements OnModuleInit  {
+export class CloudinaryConfigService   {
 
   constructor( private readonly configService: ConfigService){
        
-  }
-  onModuleInit() {
-  
-    
-   cloudinary.config({
-       cloud_name: this.configService.getOrThrow<string>('CLOUDY_NAME'),
-      api_key: this.configService.getOrThrow<string>('API_KEY_CLOUD'),
-      api_secret: this.configService.getOrThrow<string>('API_SECRET_CLOUD'),
+    cloudinary.config({
+       cloud_name: process.env.CLOUDY_NAME,
+      api_key: process.env.API_KEY_CLOUD,
+      api_secret: process.env.API_SECRET_CLOUD,
     });
   }
+ 
  
     async uploadImageBuffer(file: Express.Multer.File): Promise<string> {
     return new Promise((resolve, reject) => {

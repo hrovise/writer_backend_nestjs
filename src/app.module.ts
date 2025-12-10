@@ -19,7 +19,10 @@ import Joi from 'joi';
       envFilePath: '.env',
        validationSchema: Joi.object({
     JWT_SECRET: Joi.string().required(), 
-   
+    CLOUDY_NAME: Joi.string().required(), 
+    API_SECRET_CLOUD: Joi.string().required(), 
+    API_KEY_CLOUD: Joi.string().required(), 
+ 
   }),
     }),
  JwtModule.registerAsync({ 
