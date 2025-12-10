@@ -9,13 +9,16 @@ import { ConfigService } from '@nestjs/config';
  
 
 async function bootstrap() {
+  
   const app = await NestFactory.create(AppModule);
-  const configService = app.get(ConfigService);
+ 
+  const originRaw = process.env.CLIENT_URL || '';
+const safeOrigin = originRaw.trim().replace(/\/$/, '').replace(/^"|"$/g, '');
   app.setGlobalPrefix('api');
   const connection = app.get<Connection>(getConnectionToken());
   app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
   app.enableCors({
-    origin: process.env.CLIENT_URL,
+    origin: safeOrigin,
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type, Authorization, X-Requested-With'
