@@ -6,13 +6,15 @@ import * as express from 'express';
 import { join } from 'path';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
+import { Logger } from '@nestjs/common';
  
 
 async function bootstrap() {
   
   const app = await NestFactory.create(AppModule);
  
- 
+ const logger = new Logger('Bootstrap');
+ logger.log('cors URL', process.env.CLIENT_URL)
   app.setGlobalPrefix('api');
   const connection = app.get<Connection>(getConnectionToken());
   app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
