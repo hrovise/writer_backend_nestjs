@@ -11,10 +11,13 @@ import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
   
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule,{
+    
+  logger: ['log', 'error', 'warn', 'debug', 'verbose']
+  });
  
  const logger = new Logger('Bootstrap');
- logger.log('cors URL', process.env.CLIENT_URL)
+ logger.log(`App started: ${process.env.PORT, process.env.CLIENT_URL}`);
   app.setGlobalPrefix('api');
   const connection = app.get<Connection>(getConnectionToken());
   app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
