@@ -17,6 +17,10 @@ import Joi from 'joi';
     ConfigModule.forRoot({
       isGlobal:true,
       envFilePath: '.env',
+       validationSchema: Joi.object({
+    JWT_SECRET: Joi.string().required(), 
+   
+  }),
     }),
  JwtModule.registerAsync({ 
   global: true,
