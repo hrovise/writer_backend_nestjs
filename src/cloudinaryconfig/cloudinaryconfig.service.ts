@@ -8,11 +8,13 @@ import * as streamifier from 'streamifier';
 export class CloudinaryConfigService  {
 
   constructor( private readonly configService: ConfigService){
+     
     cloudinary.config({
-       cloud_name: this.configService.getOrThrow<string>('CLOUDY_NAME'),
+       cloud_name: process.env.CLOUDY_NAME,
       api_key: this.configService.getOrThrow<string>('API_KEY_CLOUD'),
       api_secret: this.configService.getOrThrow<string>('API_SECRET_CLOUD'),
     });
+
   }
  
     async uploadImageBuffer(file: Express.Multer.File): Promise<string> {
