@@ -15,7 +15,7 @@ async function bootstrap() {
   const connection = app.get<Connection>(getConnectionToken());
   app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
   app.enableCors({
-    origin: configService.getOrThrow<string>('CLIENT_URL'),
+    origin: process.env.CLIENT_URL,
     credentials: true,
   });
   connection.once('open', () => {

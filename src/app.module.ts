@@ -22,7 +22,8 @@ import Joi from 'joi';
     CLOUDY_NAME: Joi.string().required(), 
     API_SECRET_CLOUD: Joi.string().required(), 
     API_KEY_CLOUD: Joi.string().required(), 
- 
+ CLIENT_URL: Joi.string().required(), 
+
   }),
     }),
  JwtModule.registerAsync({ 
