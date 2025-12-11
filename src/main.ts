@@ -17,7 +17,7 @@ async function bootstrap() {
   });
  
  const logger = new Logger('Bootstrap');
- logger.log(`App started: ${process.env.PORT, process.env.CLIENT_URL}`);
+ logger.log(`App started: ${process.env.PORT}, URL=${process.env.CLIENT_URL}`);
   app.setGlobalPrefix('api');
   const connection = app.get<Connection>(getConnectionToken());
   app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));

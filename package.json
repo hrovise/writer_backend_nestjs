@@ -27,6 +27,7 @@
     "@nestjs/mongoose": "^11.0.3",
     "@nestjs/platform-express": "^11.1.6",
     "@nestjs/swagger": "^11.2.1",
+    "@nestjs/throttler": "^6.5.0",
     "@typegoose/typegoose": "^12.18.0",
     "adm-zip": "^0.5.16",
     "bcrypt": "^6.0.0",
@@ -94,8 +95,8 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
-      "moduleNameMapper": {
-    "^src/(.*)$": "<rootDir>/$1"
-  }
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/$1"
+    }
   }
 }

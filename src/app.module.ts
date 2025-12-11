@@ -12,6 +12,8 @@ import { JwtStrategy } from './auth/jwt.strategy';
 import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
 import Joi from 'joi';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -26,6 +28,10 @@ import Joi from 'joi';
 
   }),
     }),
+    ThrottlerModule.forRoot([{
+      ttl: 60000, 
+      limit: 10,  
+    }]),
  JwtModule.registerAsync({ 
   global: true,
       imports: [ConfigModule], 
@@ -45,6 +51,10 @@ import Joi from 'joi';
     UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService, FileValidatorService, CloudinaryConfigService, JwtStrategy],
+  providers: [AppService, FileValidatorService, CloudinaryConfigService, JwtStrategy,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+}],
 })
 export class AppModule {}
