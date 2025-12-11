@@ -15,7 +15,8 @@ async function bootstrap() {
     
   logger: ['log', 'error', 'warn', 'debug', 'verbose']
   });
- 
+   app.getHttpAdapter().getInstance().set('trust proxy', 1);
+   
  const logger = new Logger('Bootstrap');
  logger.log(`App started: ${process.env.PORT}, URL=${process.env.CLIENT_URL}`);
   app.setGlobalPrefix('api');
